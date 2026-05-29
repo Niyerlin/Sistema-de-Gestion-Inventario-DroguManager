@@ -226,3 +226,12 @@ th {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+body {
+  background-color: #f0f2f5; 
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.card {
+  border-radius: 15px; 
+}
