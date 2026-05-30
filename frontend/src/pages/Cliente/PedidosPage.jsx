@@ -33,3 +33,4 @@ const PedidosPage = () => {
 };
 
 export default PedidosPage;
+

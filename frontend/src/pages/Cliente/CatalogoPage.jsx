@@ -67,3 +67,4 @@ const CatalogoPage = () => {
 };
 
 export default CatalogoPage;
+
