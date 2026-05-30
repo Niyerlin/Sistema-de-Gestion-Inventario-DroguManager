@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { obtenerProductos } from '../../services/api';
+// 1. Importamos el hook del carrito
+import { useCarrito } from '../../context/CarritoContext'; 
 
 const CatalogoPage = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // 2. Extraemos la función agregarAlCarrito
+  const { agregarAlCarrito } = useCarrito(); 
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -41,14 +46,16 @@ const CatalogoPage = () => {
               
               <div style={{ marginTop: 'auto' }}>
                 <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)', marginBottom: '1rem' }}>
-                  Stock disponible: <span style={{ fontWeight: '600', color: producto.cantidadStock > 0 ? 'inherit' : 'red' }}>{producto.cantidadStock}</span>
+                  Stock disponible: <span style={{ fontWeight: '600', color: producto.cantidadEnStock > 0 ? 'inherit' : 'red' }}>{producto.cantidadEnStock}</span>
                 </p>
                 <button 
                   className="btn btn-primary btn-block" 
-                  disabled={producto.cantidadStock <= 0}
-                  style={{ opacity: producto.cantidadStock <= 0 ? 0.5 : 1 }}
+                  disabled={producto.cantidadEnStock <= 0}
+                  style={{ opacity: producto.cantidadEnStock <= 0 ? 0.5 : 1 }}
+                  // 3. Añadimos el evento onClick
+                  onClick={() => agregarAlCarrito(producto)}
                 >
-                  {producto.cantidadStock > 0 ? 'Añadir al Carrito' : 'Agotado'}
+                  {producto.cantidadEnStock > 0 ? 'Añadir al Carrito' : 'Agotado'}
                 </button>
               </div>
             </div>
